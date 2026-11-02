@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: alexongmac-app
+spec:
+  project: default
+  source:
+    repoURL: "https://github.com/alexongmac/ClassActivity3_13.git"
+    targetRevision: main
+    path: . # depends on which folder it's in
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: alexongmac-ns
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
